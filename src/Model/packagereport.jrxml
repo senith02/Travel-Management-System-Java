@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8227ef89-4567-4733-901d-885140e32fc6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+    bp.package AS package_name,
+    COUNT(bp.username) AS total_customers,
+    SUM(bp.cost) AS total_income
+FROM
+    bookpackage bp
+GROUP BY
+    bp.package
+ORDER BY
+    total_customers DESC;]]>
+	</queryString>
+	<field name="package_name" class="java.lang.String"/>
+	<field name="total_customers" class="java.lang.Long"/>
+	<field name="total_income" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="126" y="17" width="294" height="44" uuid="a46242d4-fdbf-4613-bca4-5329f23477e2"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Package Income Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="2" width="100" height="20" uuid="427682ec-7e37-47d1-b8e2-4a1eaa3e6a6c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Package Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="234" y="2" width="100" height="20" uuid="528c53bc-2437-4401-8ece-a6e757ff4fc7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Customers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="2" width="100" height="20" uuid="fea78194-a8d0-4c82-aaf4-f741a17a53ee"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Income]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="33" y="47" width="100" height="20" uuid="5c17ec44-8477-443a-be25-ba69a025b24d"/>
+				<textFieldExpression><![CDATA[$F{package_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="47" width="100" height="20" uuid="6d3d621b-6d39-4f07-9480-b7d9a432994c"/>
+				<textFieldExpression><![CDATA[$F{total_customers}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="47" width="100" height="20" uuid="de523369-8c37-41a6-9859-9460dddbabbd"/>
+				<textFieldExpression><![CDATA[$F{total_income}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

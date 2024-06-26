@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b871b7a-7cd3-43b5-8e78-3e4da8196c1e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="username" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+    c.name AS full_name,
+    IFNULL(SUM(bp.cost), 0) AS package_bill,
+    IFNULL(SUM(bh.cost), 0) AS hotel_bill,
+    IFNULL(SUM(bp.cost), 0) + IFNULL(SUM(bh.cost), 0) AS total_bill
+FROM
+    customer c
+LEFT JOIN
+    bookpackage bp ON c.username = bp.username
+LEFT JOIN
+    bookhotel bh ON c.username = bh.username
+WHERE
+    c.username = $P{username}
+]]>
+	</queryString>
+	<field name="full_name" class="java.lang.String"/>
+	<field name="package_bill" class="java.math.BigDecimal"/>
+	<field name="hotel_bill" class="java.math.BigDecimal"/>
+	<field name="total_bill" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="14" width="161" height="39" uuid="6aa3f973-cf52-490e-98fb-f97ff07f3345"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Bill]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="2" width="100" height="20" uuid="8636671d-0cb8-47ff-8c14-cc71a28c3d7d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Full Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="2" width="100" height="20" uuid="6ca68fe8-3dc6-4da9-aaec-e50341b69768"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Package Bill]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="2" width="100" height="20" uuid="e24f698e-a511-4a6b-8af2-f514de78e493"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hotel Bill]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="2" width="100" height="20" uuid="f552cff7-83c0-46e3-afdf-8835f5193cad"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Bill]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="13" y="35" width="100" height="20" uuid="f0a32fc9-e617-4348-b04f-7b26835a0324"/>
+				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="35" width="100" height="20" uuid="5a77418d-a868-4372-ba2d-eabbef801385"/>
+				<textFieldExpression><![CDATA[$F{package_bill}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="35" width="100" height="20" uuid="733f8698-326c-4bb8-a1d0-39979f96410e"/>
+				<textFieldExpression><![CDATA[$F{hotel_bill}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="35" width="100" height="20" uuid="d152144d-5d1a-4071-80ad-b9cd6eb76f3f"/>
+				<textFieldExpression><![CDATA[$F{total_bill}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
